@@ -67,7 +67,7 @@ smoothly-app > smoothly-notifier > header > nav > ul > li > *:not(a) {
 	display: inline-block;
 	height: 100%;
 	margin: 0;
-	/* flex-shrink:0; */
+	flex-shrink:0;
 }
 smoothly-app > smoothly-notifier > header > h1 a,
 smoothly-app > smoothly-notifier > header > nav > ul > li a {
@@ -104,5 +104,6 @@ smoothly-app > smoothly-notifier > content {
 @media only screen and (max-width: 1250px) {
 	smoothly-app > smoothly-notifier > header > nav > ul > li[data-responsive] {
 		display: none;
-	}
+	}	
 }
+

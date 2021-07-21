@@ -104,11 +104,13 @@ export const App: FunctionalComponent<{ label: string; user?: string; responsive
 				<nav>
 					<ul>
 						{navigationLinks()}
-						<li>
-							<smoothly-user-menu user-name={attributes.user ?? ""} responsive={attributes.responsive}>
-								{navigationLinks(true)}
-							</smoothly-user-menu>
-						</li>
+						{attributes.user ? (
+							<li>
+								<smoothly-user-menu user-name={attributes.user} responsive={attributes.responsive}>
+									{navigationLinks(true)}
+								</smoothly-user-menu>
+							</li>
+						) : undefined}
 					</ul>
 				</nav>
 			</header>

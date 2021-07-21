@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Component, Event, EventEmitter, h, Host, Prop, State } from "@stencil/core"
+import { Component, Event, EventEmitter, h, Prop } from "@stencil/core"
 import { Trigger } from "../../model"
 
 @Component({
@@ -8,7 +8,7 @@ import { Trigger } from "../../model"
 	scoped: true,
 })
 export class SmoothlyUserMenu {
-	@State() isOpen = false
+	@Prop({ reflect: true }) isOpen = false
 	@Prop() userName: string
 	@Prop() responsive?: true
 	@Event() trigger: EventEmitter<Trigger>
@@ -23,24 +23,22 @@ export class SmoothlyUserMenu {
 	}
 
 	render() {
-		return (
-			<Host open={this.isOpen}>
-				<a onClick={e => this.toggle()} class={{ active: this.isOpen }}>
-					<smoothly-icon name="reorder-three" size="medium" data-responsive={this.responsive}></smoothly-icon>
-					<smoothly-icon name="person" size="medium" data-responsive={this.responsive}></smoothly-icon>
-				</a>
-				<div class="background" onClick={() => this.close()} />
-				<div>
-					<div>{this.userName}</div>
-					<ul>
-						<slot name="small-screen" />
-						<li onClick={() => this.logout()}>
-							<span>Logout</span>
-							<smoothly-icon name="log-out" size="medium"></smoothly-icon>
-						</li>
-					</ul>
-				</div>
-			</Host>
-		)
+		return [
+			<a onClick={e => this.toggle()} class={{ active: this.isOpen }}>
+				<smoothly-icon name="reorder-three" size="medium" data-responsive={this.responsive}></smoothly-icon>
+				<smoothly-icon name="person" size="medium" data-responsive={this.responsive}></smoothly-icon>
+			</a>,
+			<div class="background" onClick={() => this.close()} />,
+			<div>
+				<div>{this.userName}</div>
+				<ul onClick={() => this.toggle()}>
+					<slot name="small-screen" />
+					<li onClick={() => this.logout()}>
+						<span>Logout</span>
+						<smoothly-icon name="log-out" size="medium"></smoothly-icon>
+					</li>
+				</ul>
+			</div>,
+		]
 	}
 }
